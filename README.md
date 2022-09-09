@@ -1,5 +1,4 @@
-Login Page
-<img width="960" alt="login Page" src="https://user-images.githubusercontent.com/96935072/189306804-1494237f-0849-4712-98d8-02e7a6dd8ebb.png">
+
 # MyAngularApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
