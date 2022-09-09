@@ -1,3 +1,4 @@
+
 Register Page
 <img width="960" alt="Register Page" src="https://user-images.githubusercontent.com/96935072/189313762-d9f42b26-1485-414f-b1f8-9884f4c59049.png">
 
@@ -12,3 +13,9 @@ All-Blog Page
 
 My-Blog Page
 <img width="960" alt="My-Blog Page" src="https://user-images.githubusercontent.com/96935072/189314201-fc86d4e1-12a5-4adc-9353-0f652b1adf70.png">
+
+Create Blog Modal
+<img width="958" alt="Create Blog Modal" src="https://user-images.githubusercontent.com/96935072/189314575-842e651f-5246-46fd-8e28-0a5e277620ce.png">
+
+Update Blog Modal
+<img width="957" alt="Update Blog Modal" src="https://user-images.githubusercontent.com/96935072/189314594-bdf2f486-88ae-4d26-8d43-795a90837cfc.png">
