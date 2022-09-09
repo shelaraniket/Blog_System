@@ -1,0 +1,137 @@
+<div class="d-flex justify-contnt-end my-2">
+    <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="modal" data-bs-target="#myModal">
+        Create Blogs <i class="bi bi-plus-square"></i>
+    </button>
+</div>
+
+
+<div class="container-fluid h-100vh">
+    <div class="row d-flex justify-content-center">
+        <div *ngFor="let blog of myBlog" class="col-lg-8 bg-light my-2 ms-0 shadow-lg p-3 mb-5 bg-body rounded">
+            <div>
+                <h3 style="font-family: Georgia, 'Times New Roman', Times, serif;">{{blog.title | titlecase}}</h3>
+                <i class="fs-7" style="font-size: 13px; font-weight: 400; color: gray;">{{blog.postedAt |date:'medium'}}</i>
+            </div>
+
+            <div class="my-3 d-flex justify-content-center">
+                <!-- <q style="word-break: break-all; font-size: 17px;">{{blog.content}}</q> -->
+                <q style="word-break: break-all; font-size: 17px;" [innerHTML]="blog.content"></q>
+                <!-- [innerHTML]="blog.content"-: whenever we add text using angular editior and render on front end this time whatever written in input this shows in span tag -->
+            </div>
+
+            <div class=" d-flex justify-content-end">
+                <i  style="color: grey;"> Posted By - {{blog.authorDetail?.name | titlecase}}</i>
+            </div>
+            
+
+            <div class="d-flex justify-content-center mt-2">
+                <button type="button" class="btn btn-warning mx-2 btn-sm btn" (click)="toggle(blog)">Comments <i class="bi bi-chat"></i> {{blog.comments.length}}</button>
+                <button type="button" class="btn btn-warning mx-2 btn-sm btn" data-bs-toggle="modal" 
+                    data-bs-target="#exampleModal" data-bs-whatever="@mdo" (click)="openModal(blog)">Update <i class="bi bi-pencil-square"></i></button>
+                <button type="button" class="btn btn-warning btn-sm btn" (click)="deleteBlog(blog._id)">Delete <i class="bi bi-trash3-fill"></i></button>
+            </div>
+
+                
+            <!-- <div class="mt-2 d-flex justify-content-center d-none" id="comments">
+                <input type="text" class="w-100" value="" #comment> <button class="btn btn-primary btn-sm ms-3" >Post</button>
+            </div> -->
+
+
+            <!-- Comment Section -->
+            <div class="comment mt-3" *ngIf="blog.showComments">
+                    <div class="d-flex justify-content-center ">
+                        <input style="border-radius: 20px;" type="text" id="emojis" class="w-75" name="" placeholder="Add Comment" [(ngModel)]="blog.tempComment">
+                        <button class="btn btn-primary ms-3 rounded-pill"  (click)="PostComment(blog._id,blog)">Post </button>
+                    </div>
+
+                    <div class="mt-2 d-flex justify-content-center">
+                        <div class="w-75">
+                            <ul class="Lists" *ngFor="let comment of blog.comments">
+                                <div class="bg-light rounded-pill">
+                                    <li><h6 class="ms-4 fw-bold text-primary">{{comment.userName | titlecase}}</h6>
+                                        <span class="ms-5">{{comment.comment}}</span><br>
+                                        <!-- <span>Posted At : {{comment.postedAt | date:'medium'}}</span> -->
+                                    </li>
+                                </div>
+                            <span class="ms-5" style="font-size: 12px;">{{comment.postedAt | date:'short'}}</span>
+                          </ul>
+                      </div>
+                  </div>
+            </div>
+
+  
+        </div>
+    </div>
+</div>
+
+    
+
+ <!-- Update Modal -->
+ <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Update Blog</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body container">
+          <form>
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">Title:</label>
+              <input type="text" class="form-control" id="recipient-name" value={{currentUpdatingBlog?.title}} #updatedTitle>
+            </div>
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">Content:</label>
+              <textarea maxlength="5000" class="form-control" id="message-text" value={{currentUpdatingBlog?.content}}  #updatedContent></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="updateBlogs(currentUpdatingBlog._id,updatedTitle,updatedContent)">Save Changes</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+<!-- craete modal -->
+                
+<div class="modal" id="myModal">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+    
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Create New Blogs</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+    
+            <!-- Modal body -->
+            <div class="modal-body">
+                <main>
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Title:</label>
+                        <angular-editor type="text" class="form-control" id="title" value=" Aniket123" [(ngModel)]="title"></angular-editor>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Content:</label>
+                        <angular-editor class="form-control" id="content" value=" Aniket123" [(ngModel)]="content" ></angular-editor>
+                    </div>
+                </main>
+            </div>
+    
+            <!-- Modal footer -->
+            <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="createBlogs()">Create</button>
+            </div>
+    
+        </div>
+    </div>
+</div>
+
+
+
+

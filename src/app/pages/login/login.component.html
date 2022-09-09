@@ -1,0 +1,49 @@
+<section class="container shadow p-3 mb-5 bg-body rounded-3 mt-5" style="height: calc(85vh - 100px); background-color: white;">
+    <div class="alert alert-warning" role="alert" *ngIf="loginError">
+      Email/Password is Invalid............
+    </div>
+    <div class="container h-custom">
+      <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-md-9 col-lg-6 col-xl-5">
+          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+            class="img-fluid" alt="Sample image">
+        </div>
+        <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+          <form [formGroup]="fg">
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+              <label class="form-label" for="form3Example3 " >Email address</label>
+              <input type="email" id="form3Example3" class="form-control form-control-lg"
+              placeholder="Enter a valid email address" formControlName="email" />
+              <p class="text-danger" *ngIf=" fg?.get('email').touched && fg?.get('email').errors?.email">
+                Email Id is not valid
+              </p>
+            </div>
+  
+            <!-- Password input -->
+            <div class="form-outline mb-3">
+              <label class="form-label" for="form3Example4">Password</label>
+              <input type="password" id="form3Example4" class="form-control form-control-lg" placeholder="Enter password" formControlName="password"/>
+              <p class="text-danger" *ngIf=" fg?.get('password').touched && fg?.get('password').errors?.required">
+                Password is required
+              </p>
+            </div>
+  
+            <div class="text-center text-lg-start mt-4 pt-2">
+              <button type="button" class="btn btn-primary btn-lg"
+                style="padding-left: 2.5rem; padding-right: 2.5rem;" (click)="login()">Login
+                <div class="spinner-border text-warning" role="status" *ngIf="loading">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </button>
+              <p class="small mt-2 pt-1 fs-5 mb-0">Don't have an account? 
+                <a class="link-danger" routerLink="/register">Register</a></p>
+            </div>
+  
+          </form>
+        </div>
+      </div>
+    </div>
+   
+  </section>
+  

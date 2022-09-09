@@ -1,0 +1,56 @@
+
+<div class="container-fluid h-100vh ">
+    <div class="row d-flex justify-content-center">
+        <div *ngFor="let blog of allBlog"class="col-lg-8 bg-light my-2 ms-0 shadow-lg p-3 mb-5 bg-body rounded">
+            <div>
+                <h3 style="font-family: Georgia, 'Times New Roman', Times, serif;">{{blog.title | titlecase}}</h3>
+                <i style="font-size: 13px; color: grey; font-weight: 400;">{{blog.postedAt |date:'medium'}}</i>
+            </div>
+            <div class="my-3 d-flex justify-content-center">
+                <q style="word-break: break-all; font-size: 20;" [innerHTML]="blog.content"></q>
+            </div>
+
+            <div class=" d-flex justify-content-end">
+                <i style="color: grey;">Posted By - {{blog.authorDetail?.name | titlecase}}</i>
+            </div>
+
+            <div class="d-flex justify-content-center mt-2">
+              <button type="button" class="btn btn-success mx-2 btn-sm" (click)="toggle(blog)">Comments  <i class="bi bi-chat"></i>  
+                {{blog.comments.length}} </button>
+            </div>
+
+                
+
+
+            <!-- Comment Section -->
+            <div class="comment mt-3" *ngIf="blog.showComments">
+              <div class="d-flex justify-content-center ">
+                  <input style="border-radius: 20px;" type="text" class="w-75" name="" id="" placeholder="Add Comment" [(ngModel)]="blog.tempComment">
+                  <button class="btn btn-primary ms-3 rounded-pill" (click)="PostComment(blog._id,blog)">Post </button>
+              </div>
+
+                <div class="mt-2 d-flex justify-content-center">
+                  <div class="w-75">
+                      <ul class="Lists" *ngFor="let comment of blog.comments">
+                          <div class="bg-light rounded-pill">
+                              <li><h6 class="ms-4 fw-bold text-primary">{{comment.userName | titlecase}}</h6>
+                                  <span class="ms-5">{{comment.comment}}</span><br>
+                                  <!-- <span>Posted At : {{comment.postedAt | date:'medium'}}</span> -->
+                              </li>
+                          </div>
+                          <span class="ms-5" style="font-size: 12px;">{{comment.postedAt | date:'short'}}</span>
+                        </ul>
+                    </div>
+                </div>
+    
+
+
+            </div>
+      
+
+        </div>
+    </div>
+</div>
+
+
+

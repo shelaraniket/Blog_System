@@ -1,0 +1,7 @@
+.Lists{
+    list-style-type: none;
+}
+.btn:hover{
+    transition: all 0.8s ease-in-out;
+    transform: scale(0.9);
+  }
